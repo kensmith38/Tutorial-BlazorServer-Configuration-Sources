@@ -1,1 +1,1 @@
-# TutorialBlazorServerConfigurationSources
+# Tutorial: BlazorServer Configuration Sources
