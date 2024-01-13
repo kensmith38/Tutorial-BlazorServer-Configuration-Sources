@@ -1,0 +1,33 @@
+﻿@page "/"
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<p><b>Configuration sources in priority order (highest to lowest)</b></p>
+<ol>
+    @for (int iii=ListConfigurationProviders.Count; iii>0; iii--)
+    {
+        <li>@ListConfigurationProviders[iii-1]</li>
+    }
+</ol>
+
+<p>Value of MySecret: @Configuration["MySecret"]</p>
+
+@code {
+    [Inject]
+    IConfiguration? Configuration { get; set; }
+
+    List<string> ListConfigurationProviders = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        IConfigurationRoot configRoot = (IConfigurationRoot)Configuration;
+
+        foreach (var provider in configRoot.Providers.ToList())
+        {
+            ListConfigurationProviders.Add(provider.ToString());
+        }
+    }
+}
